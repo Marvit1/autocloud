@@ -248,7 +248,7 @@ const lightboxOpen = ref(false)
 
 // 2. FETCH DATA (Կարևոր է SSR-ի համար՝ await-ով)
 const { data: car, pending, error, refresh } = await useFetch<any>(
-  () => `https://autback.onrender.com/api/cars/${id}/`,
+  () => `https://api.autoswift.shop/api/cars/${id}/`,
   {
     query: { lang: locale.value },
     key: `car-detail-${id}-${locale.value}`,
