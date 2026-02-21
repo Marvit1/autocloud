@@ -308,7 +308,7 @@ const getImageUrl = (img: any): string => {
   if (!path) return defaultImage
   if (path.startsWith('http')) return path
   const cleanPath = path.startsWith('/') ? path : '/' + path
-  return `https://autback.onrender.com${cleanPath}`
+  return `https://api.autoswift.shop${cleanPath}`
 }
 
 const formatPrice = (price: number): string => {

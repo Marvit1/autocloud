@@ -1,6 +1,6 @@
 <template>
   <div class="cars-page">
-    <h1 class="page-title">{{ t('cars.title') }}</h1>
+    <h1 class="page-title"></h1>
     <div class="main-grid">
       <section class="cars-section">
         <div v-if="loading" class="status">{{ t('cars.loading') }}</div>
