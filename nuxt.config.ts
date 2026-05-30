@@ -3,6 +3,9 @@ declare const process: {
   env: { [key: string]: string | undefined }
 }
 
+const baseUrl = process.env.BASE_URL || 'https://www.autoswift.shop'
+const defaultOgImage = `${baseUrl}/images/logs.jpg`
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
@@ -22,7 +25,7 @@ export default defineNuxtConfig({
   // ✅ Կայքի հիմնական տվյալները
   runtimeConfig: {
     public: {
-      baseUrl: process.env.BASE_URL || 'https://www.autoswift.shop',
+      baseUrl,
       apiBase: process.env.API_BASE_URL || 'https://api.autoswift.shop',
       siteName: 'AutoSwift',
     }
@@ -47,9 +50,9 @@ export default defineNuxtConfig({
       titleTemplate: '%s · AutoSwift',
       
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/images/logs.jpg' }, // Ստանդարտ favicon
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, // Ստանդարտ favicon
         { rel: 'apple-touch-icon', href: '/aa.jpg' }, // iOS-ի համար
-        { rel: 'canonical', href: 'https://www.autoswift.shop' },
+        { rel: 'canonical', href: baseUrl },
         { rel: 'preconnect', href: 'https://api.autoswift.shop' }
       ],
 
@@ -63,22 +66,24 @@ export default defineNuxtConfig({
         // ✅ FACEBOOK / OPEN GRAPH
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'AutoSwift' },
-        { property: 'og:url', content: 'https://www.autoswift.shop' },
+        { property: 'og:url', content: baseUrl },
         { property: 'og:title', content: 'AutoSwift - ավտոմեքենաների խանութ' },
         { property: 'og:description', content: 'AutoSwift – մեծ ընտրանի ավտոմեքենաներ անվտանգ ներմուծման և վաճառքի ծառայություններով։' },
+        { property: 'og:locale', content: 'hy_AM' },
         
         // ⚠️ Օգտագործում ենք բացարձակ հղում նկարի համար
-        { property: 'og:image', content: 'https://www.autoswift.shop/images/logs.jpg' },
-        { property: 'og:image:secure_url', content: 'https://www.autoswift.shop/images/logs.jpg' },
-        { property: 'og:image:width', content: '1200' },
-        { property: 'og:image:height', content: '630' },
+        { property: 'og:image', content: defaultOgImage },
+        { property: 'og:image:secure_url', content: defaultOgImage },
+        { property: 'og:image:width', content: '1024' },
+        { property: 'og:image:height', content: '765' },
         { property: 'og:image:alt', content: 'AutoSwift Logo' },
 
         // ✅ TWITTER
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'AutoSwift - ավտոմեքենաների խանութ' },
         { name: 'twitter:description', content: 'AutoSwift – մեծ ընտրանի ավտոմեքենաներ...' },
-        { name: 'twitter:image', content: 'https://www.autoswift.shop/images/logs.jpg' },
+        { name: 'twitter:image', content: defaultOgImage },
+        { name: 'twitter:image:alt', content: 'AutoSwift Logo' },
 
         // ✅ SEO & Robots
         { name: 'robots', content: 'index, follow' },
@@ -90,7 +95,7 @@ export default defineNuxtConfig({
   i18n: {
     strategy: 'prefix_except_default',
     defaultLocale: 'hy',
-    baseUrl: 'https://www.autoswift.shop',
+    baseUrl,
     locales: [
       { code: 'hy', iso: 'hy-AM', name: 'Հայերեն', file: 'hy.json' },
       { code: 'ru', iso: 'ru-RU', name: 'Русский', file: 'ru.json' },

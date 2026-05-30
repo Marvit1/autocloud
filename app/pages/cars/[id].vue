@@ -234,13 +234,13 @@ import { useI18n } from "vue-i18n"
 import { useLocalePath, useHead, useSeoMeta, useRuntimeConfig, useFetch } from "#imports"
 
 // 1. Սկզբնական արժեքներ
-const defaultImage = 'https://www.autoswift.shop/images/logs.jpg'
 const route = useRoute()
 const id = route.params.id as string
 const i18nAll = useI18n({ useScope: 'global' })
 const { t, locale } = i18nAll
 const localePath = useLocalePath()
 const config = useRuntimeConfig()
+const defaultImage = `${config.public.baseUrl}/images/logs.jpg`
 
 // State
 const currentImageIndex = ref(0)
@@ -393,8 +393,6 @@ useSeoMeta({
   ogImage: carImage,
   ogImageSecureUrl: carImage,
   ogImageType: 'image/jpeg',
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
   ogUrl: () => `${config.public.baseUrl}${route.fullPath}`,
   twitterCard: 'summary_large_image',
   twitterTitle: carTitle,
