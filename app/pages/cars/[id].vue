@@ -333,9 +333,8 @@ const getOgImageUrl = (img: any): string => {
     absoluteUrl = `${config.public.apiBase}${cleanPath}`
   }
   
-  // Strip protocol for images.weserv.nl and return encoded URL
-  const cleanUrl = absoluteUrl.replace(/^https?:\/\//i, '')
-  return `https://images.weserv.nl/?url=${encodeURIComponent(cleanUrl)}`
+  // Return encoded full URL (with protocol) to images.weserv.nl
+  return `https://images.weserv.nl/?url=${encodeURIComponent(absoluteUrl)}`
 }
 
 const formatPrice = (price: number): string => {
