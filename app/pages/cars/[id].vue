@@ -326,16 +326,16 @@ const getOgImageUrl = (img: any): string => {
 
   if (!path) return defaultImage
   
-  if (path.includes('/media/')) {
-    const parts = path.split('/media/')
-    const relativePath = parts[parts.length - 1]
-    return `${config.public.baseUrl}/api/proxy-image?path=${encodeURIComponent(relativePath)}`
+  // Resolve relative paths to absolute API URLs
+  let absoluteUrl = path
+  if (!path.startsWith('http')) {
+    const cleanPath = path.startsWith('/') ? path : '/' + path
+    absoluteUrl = `${config.public.apiBase}${cleanPath}`
   }
   
-  if (path.startsWith('http')) return path
-  
-  const cleanPath = path.startsWith('/') ? path.substring(1) : path
-  return `${config.public.baseUrl}/api/proxy-image?path=${encodeURIComponent(cleanPath)}`
+  // Strip protocol for images.weserv.nl and return encoded URL
+  const cleanUrl = absoluteUrl.replace(/^https?:\/\//i, '')
+  return `https://images.weserv.nl/?url=${encodeURIComponent(cleanUrl)}`
 }
 
 const formatPrice = (price: number): string => {
