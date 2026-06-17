@@ -44,11 +44,15 @@ useSeoMeta({
   ogDescription: () => description.value,
   ogImage: () => defaultOgImage,
   ogImageSecureUrl: () => defaultOgImage,
+  ogImageWidth: 1024,
+  ogImageHeight: 765,
+  ogImageAlt: 'AutoSwift Logo',
   ogUrl: () => `${config.public.baseUrl}${route.fullPath}`,
   twitterCard: 'summary_large_image',
   twitterTitle: () => title.value,
   twitterDescription: () => description.value,
   twitterImage: () => defaultOgImage,
+  twitterImageAlt: 'AutoSwift Logo',
 })
 
 const filters = reactive({
