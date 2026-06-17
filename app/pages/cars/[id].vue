@@ -311,6 +311,33 @@ const getImageUrl = (img: any): string => {
   return `${config.public.apiBase}${cleanPath}`
 }
 
+const getOgImageUrl = (img: any): string => {
+  if (!img) return defaultImage
+  let path = ''
+  if (typeof img === 'string') {
+    path = img
+  } else if (img.url) {
+    path = img.url
+  } else if (img.src) {
+    path = img.src
+  } else if (img.image) {
+    return getOgImageUrl(img.image)
+  }
+
+  if (!path) return defaultImage
+  
+  if (path.includes('/media/')) {
+    const parts = path.split('/media/')
+    const relativePath = parts[parts.length - 1]
+    return `${config.public.baseUrl}/api/proxy-image?path=${encodeURIComponent(relativePath)}`
+  }
+  
+  if (path.startsWith('http')) return path
+  
+  const cleanPath = path.startsWith('/') ? path.substring(1) : path
+  return `${config.public.baseUrl}/api/proxy-image?path=${encodeURIComponent(cleanPath)}`
+}
+
 const formatPrice = (price: number): string => {
   if (!price) return '$0'
   return new Intl.NumberFormat('en-US', {
@@ -384,14 +411,21 @@ const carImage = computed(() => {
   return defaultImage
 })
 
+const carImageForOg = computed(() => {
+  if (car.value?.images && car.value.images.length > 0) {
+    return getOgImageUrl(car.value.images[0].image)
+  }
+  return defaultImage
+})
+
 // 5. SEO META TAGS (SSR FRIENDLY)
 useSeoMeta({
   title: () => carTitle.value,
   ogTitle: () => carTitle.value,
   description: () => carDescription.value,
   ogDescription: () => carDescription.value,
-  ogImage: () => carImage.value,
-  ogImageSecureUrl: () => carImage.value,
+  ogImage: () => carImageForOg.value,
+  ogImageSecureUrl: () => carImageForOg.value,
   ogImageType: 'image/jpeg',
   ogImageWidth: 1200,
   ogImageHeight: 630,
@@ -400,7 +434,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterTitle: () => carTitle.value,
   twitterDescription: () => carDescription.value,
-  twitterImage: () => carImage.value,
+  twitterImage: () => carImageForOg.value,
   twitterImageAlt: () => carTitle.value,
 })
 
