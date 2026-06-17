@@ -393,11 +393,15 @@ useSeoMeta({
   ogImage: () => carImage.value,
   ogImageSecureUrl: () => carImage.value,
   ogImageType: 'image/jpeg',
+  ogImageWidth: null,
+  ogImageHeight: null,
+  ogImageAlt: () => carTitle.value,
   ogUrl: () => `${config.public.baseUrl}${route.fullPath}`,
   twitterCard: 'summary_large_image',
   twitterTitle: () => carTitle.value,
   twitterDescription: () => carDescription.value,
   twitterImage: () => carImage.value,
+  twitterImageAlt: () => carTitle.value,
 })
 
 // 6. IMAGE NAVIGATION & ACTIONS
