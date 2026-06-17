@@ -63,27 +63,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'AutoSwift – մեծ ընտրանի ավտոմեքենաներ անվտանգ ներմուծման և վաճառքի ծառայություններով։' },
         { name: 'keywords', content: 'ավտոմեքենա, մեքենա գնել, ավտոմեծ, վաճառք, Հայաստան' },
 
-        // ✅ FACEBOOK / OPEN GRAPH
-        { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'AutoSwift' },
-        { property: 'og:url', content: baseUrl },
-        { property: 'og:title', content: 'AutoSwift - ավտոմեքենաների խանութ' },
-        { property: 'og:description', content: 'AutoSwift – մեծ ընտրանի ավտոմեքենաներ անվտանգ ներմուծման և վաճառքի ծառայություններով։' },
-        { property: 'og:locale', content: 'hy_AM' },
-        
-        // ⚠️ Օգտագործում ենք բացարձակ հղում նկարի համար
-        { property: 'og:image', content: defaultOgImage },
-        { property: 'og:image:secure_url', content: defaultOgImage },
-        { property: 'og:image:width', content: '1024' },
-        { property: 'og:image:height', content: '765' },
-        { property: 'og:image:alt', content: 'AutoSwift Logo' },
-
-        // ✅ TWITTER
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'AutoSwift - ավտոմեքենաների խանութ' },
-        { name: 'twitter:description', content: 'AutoSwift – մեծ ընտրանի ավտոմեքենաներ...' },
-        { name: 'twitter:image', content: defaultOgImage },
-        { name: 'twitter:image:alt', content: 'AutoSwift Logo' },
+        // Global fallback OG/Twitter metadata is managed dynamically in app.vue to prevent duplicates.
 
         // ✅ SEO & Robots
         { name: 'robots', content: 'index, follow' },

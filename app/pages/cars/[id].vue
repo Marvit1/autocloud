@@ -308,7 +308,7 @@ const getImageUrl = (img: any): string => {
   if (!path) return defaultImage
   if (path.startsWith('http')) return path
   const cleanPath = path.startsWith('/') ? path : '/' + path
-  return `https://api.autoswift.shop${cleanPath}`
+  return `${config.public.apiBase}${cleanPath}`
 }
 
 const formatPrice = (price: number): string => {
@@ -386,18 +386,18 @@ const carImage = computed(() => {
 
 // 5. SEO META TAGS (SSR FRIENDLY)
 useSeoMeta({
-  title: carTitle,
-  ogTitle: carTitle,
-  description: carDescription,
-  ogDescription: carDescription,
-  ogImage: carImage,
-  ogImageSecureUrl: carImage,
+  title: () => carTitle.value,
+  ogTitle: () => carTitle.value,
+  description: () => carDescription.value,
+  ogDescription: () => carDescription.value,
+  ogImage: () => carImage.value,
+  ogImageSecureUrl: () => carImage.value,
   ogImageType: 'image/jpeg',
   ogUrl: () => `${config.public.baseUrl}${route.fullPath}`,
   twitterCard: 'summary_large_image',
-  twitterTitle: carTitle,
-  twitterDescription: carDescription,
-  twitterImage: carImage,
+  twitterTitle: () => carTitle.value,
+  twitterDescription: () => carDescription.value,
+  twitterImage: () => carImage.value,
 })
 
 // 6. IMAGE NAVIGATION & ACTIONS

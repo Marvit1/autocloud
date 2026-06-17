@@ -21,6 +21,7 @@
 import { computed, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useSeoMeta, useRuntimeConfig } from '#imports'
 import CarCard from '../../components/CarCard.vue'
 import { useCars } from '../../composables/useCars'
 
@@ -30,6 +31,25 @@ await fetchCars()
 
 const route = useRoute()
 const q = route.query.q || ''
+const config = useRuntimeConfig()
+
+const title = computed(() => `${t('nav.cars')} · AutoSwift`)
+const description = computed(() => t('footer.description'))
+const defaultOgImage = `${config.public.baseUrl}/images/logs.jpg`
+
+useSeoMeta({
+  title: () => title.value,
+  ogTitle: () => title.value,
+  description: () => description.value,
+  ogDescription: () => description.value,
+  ogImage: () => defaultOgImage,
+  ogImageSecureUrl: () => defaultOgImage,
+  ogUrl: () => `${config.public.baseUrl}${route.fullPath}`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => title.value,
+  twitterDescription: () => description.value,
+  twitterImage: () => defaultOgImage,
+})
 
 const filters = reactive({
   q: q,
